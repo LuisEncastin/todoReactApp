@@ -10,7 +10,12 @@ import { useLocalStorage } from '../utils/customHooks'
 
 function App() {
   // Custom hook - localStorage
-  const [toDos, saveToDos] = useLocalStorage('TODOS_V1', []);
+  const {
+    item: toDos,
+    saveItem: saveToDos,
+    loading,
+    error,
+    } = useLocalStorage('TODOS_V1', []);
 
   // State
   const [searchValue, setSearchValue] = React.useState('');
@@ -47,8 +52,20 @@ function App() {
     saveToDos(newToDos);
   }
 
+  // useEffect
+
+  // console.log('Render antes del use effect');
+
+  // React.useEffect(() => {
+  //   console.log('use effect');
+  // }, []);
+
+  // console.log('Render después del use effect');
+
   return (
     <AppUI
+      loading={loading}
+      error={error}
       totalToDos ={totalToDos}
       completedToDos = {completedToDos}
       searchValue = {searchValue}
