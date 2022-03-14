@@ -4,6 +4,9 @@ import { TodoCounter } from '../TodoCounter/TodoCounter';
 import { TodoSearch } from '../TodoSearch/TodoSearch';
 import { TodoList } from '../TodoList/TodoList';
 import { TodoItem } from '../TodoItem/TodoItem';
+import { TodosError } from '../TodosError/TodosError';
+import { TodosLoading } from '../TodosLoading/TodosLoading';
+import { EmptyTodos } from '../EmptyTodos/EmptyTodos';
 import { TodoForm } from '../TodoForm/TodoForm';
 import { CreateTodoButton } from '..//CreateTodoButton/CreateTodoButton';
 import { Modal } from '..//Modal/Modal';
@@ -27,9 +30,9 @@ function AppUI () {
                 Render props
                 En este caso, eliminamos el React.consumer para usar React.useContext*/}
             <TodoList>
-                {error && <p>There was an error</p>}
-                {loading && <p>Loading ... </p>}
-                {(!loading && !searchedTodos.length) && <p>Create your first To Do.</p>}
+                {error &&   <TodosError error={error} />}
+                {loading && <TodosLoading/>}
+                {(!loading && !searchedTodos.length) && <EmptyTodos/>}
 
                 {searchedTodos.map(toDo=>(
                     <TodoItem 
