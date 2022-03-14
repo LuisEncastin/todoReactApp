@@ -20,6 +20,7 @@ function ToDoProvider (props) {
 
   // State
   const [searchValue, setSearchValue] = React.useState('');
+  const [openModal, setOpenModal] = React.useState(false);
 
   // TodosInfo
   const completedToDos = toDos.filter(toDo=>!!toDo.completed).length;
@@ -38,6 +39,15 @@ function ToDoProvider (props) {
   }
 
   // Méthods to save, complete and delete todos
+
+  const addToDo = (text) => {
+    const newToDos = [...toDos];
+    newToDos.push({
+      completed: false,
+      text,
+    });
+    saveToDos(newToDos);
+  }
 
   const completeToDo = (text) => {
     const toDoIndex = toDos.findIndex(toDo=>toDo.text === text);
@@ -72,8 +82,11 @@ function ToDoProvider (props) {
             searchValue,
             setSearchValue,
             searchedTodos,
+            addToDo,
             completeToDo, 
             deleteToDo,
+            openModal,
+            setOpenModal
         }}>
             {props.children}
         </ToDoContext.Provider>
